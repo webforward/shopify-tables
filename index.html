@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CodePen - Table Builder Import/Export JSON</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css'>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div class="table-builder p-5">
+    <h1 class="h3 mb-2">Shopify Product Metafield Specification Table Generator</h1>
+    <h2 class="h6"><a class="text-muted" href="https://github.com/webforward/shopify-tables.github.io"
+                      target="_blank">https://github.com/webforward/shopify-tables.github.io</a></h2>
+
+
+    <div class="d-flex flex-row justify-content-between mt-4 mb-3">
+        <div class="d-flex flex-row">
+            <div class="btn-group me-3" role="group">
+                <button class="import-modal btn btn-primary">Import JSON</button>
+                <button class="html-modal btn btn-primary">Import HTML</button>
+            </div>
+            <button class="export-modal btn btn-info text-white me-3">Export JSON</button>
+            <button class="clear-table btn btn-warning text-white">Clear Table</button>
+        </div>
+    </div>
+
+    <table class="table table-bordered w-auto position-relative">
+        <tbody>
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+
+    <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-row">
+            <button class="add-row btn btn-primary me-3"><i class="bi bi-arrow-down"></i> Add Row</button>
+            <button class="add-column btn btn-primary me-3"><i class="bi bi-arrow-right"></i> Add Column</button>
+
+        </div>
+    </div>
+
+
+</div>
+
+<div class="modal" id="import-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Import JSON</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Paste the JSON code into the box below to import the table.</p>
+                <textarea class="form-control" rows="10"
+                          placeholder='[{"0":"Specification"},{"0":"Dimensions","1":"1000mm x 1430mm"}]'></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="import-json btn btn-primary">Import Table</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="export-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Export JSON</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Please find the JSON in the box below.</p>
+                <textarea class="form-control" rows="10" readonly></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-bs-dismiss="modal" aria-label="Close" class="export-json btn btn-primary">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="html-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Import HTML Table</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Please paste your HTML into the box below.</p>
+                <textarea class="form-control" rows="10" placeholder='<table>
+  <tr>
+    <td colspan="2">Specification</td>
+    </tr>
+  <tr>
+    <td>Dimensions</td>
+    <td>1000mm x 1430mm</td>
+  </tr>
+</table>'></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-bs-dismiss="modal" aria-label="Close" class="import-html btn btn-primary">
+                    Import Table
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js'></script>
+<script src="./script.js"></script>
+
+</body>
+</html>
