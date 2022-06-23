@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>CodePen - Table Builder Import/Export JSON</title>
-    <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/yeti/bootstrap.min.css'>
+    <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/cerulean/bootstrap.min.css'>
     <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css'>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/styles/github.min.css">
     <link rel="stylesheet" href="style.css">
@@ -13,8 +13,9 @@
 
 <div class="table-builder p-5">
     <h1 class="h3 mb-2">Shopify Product Metafield Specification Table Generator</h1>
-    <h2 class="h6"><a class="text-muted" href="https://github.com/webforward/shopify-tables"
-                      target="_blank">https://github.com/webforward/shopify-tables</a></h2>
+    <h2 class="h6"><i class="bi bi-github"></i> <a class="text-muted"
+                                                   href="https://github.com/webforward/shopify-tables"
+                                                   target="_blank">https://github.com/webforward/shopify-tables</a></h2>
 
 
     <div class="d-flex flex-row justify-content-between mt-4 mb-3">
@@ -44,38 +45,44 @@
 
     <hr class="mt-5"/>
     <div class="instructions mt-4">
-        <h2 class="font-bold text-primary">How to use:</h2>
+        <div class="row">
+            <div class="col-md-7">
+                <h2 class="font-bold text-primary">How to use:</h2>
 
-        <h3 class="my-4"><strong>1.</strong> Create a product metafield</h3>
+                <h3 class="my-4"><strong>1.</strong> Create a product metafield</h3>
 
-        <div class="px-3">
-            <p>Open your Shopify admin, click <strong>Settings</strong> at the bottom left, click
-                <strong>Metafield</strong>
-                towards the bottom on the left-hand side and then choose <strong>Products</strong> on the right.</p>
+                <div class="px-3">
+                    <p>Open your Shopify admin, click <strong>Settings</strong> at the bottom left, click
+                        <strong>Metafield</strong>
+                        towards the bottom on the left-hand side and then choose <strong>Products</strong> on the right.
+                    </p>
 
-            <p>At the top right, click <strong>Add definition</strong> to set up a new product metafield.</p>
+                    <p>At the top right, click <strong>Add definition</strong> to set up a new product metafield.</p>
 
-            <p>Give your metafield a name which will be displayed on the product add and edit pages.</p>
+                    <p>Give your metafield a name which will be displayed on the product add and edit pages.</p>
 
-            <p>Set a <strong>namespace and key</strong>, if you do not know what to put here, we generally use something
-                like <strong>settings.infotable</strong>. Remember what you put here as it will be needed in step 2.</p>
+                    <p>Set a <strong>namespace and key</strong>, if you do not know what to put here, we generally use
+                        something
+                        like <strong>settings.infotable</strong>. Remember what you put here as it will be needed in
+                        step 2.</p>
 
-            <p>Tick to <strong>Expose this metafield to Storefront API requests</strong></p>
+                    <p>Tick to <strong>Expose this metafield to Storefront API requests</strong></p>
 
-            <p>And finally, click <strong>Select content type</strong> and choose <strong>JSON</strong></p>
-        </div>
+                    <p>And finally, click <strong>Select content type</strong> and choose <strong>JSON</strong></p>
+                </div>
 
-        <h3 class="my-4"><strong>2.</strong> Create a template snippet to display the table</h3>
+                <h3 class="my-4"><strong>2.</strong> Create a template snippet to display the table</h3>
 
-        <div class="px-3">
-            <p>In your Shopify admin, go to <strong>Online Store &gt; Themes</strong>. On your current theme, click the
-                <strong>Actions</strong> drop down and choose <strong>Edit code</strong>.</p>
-            <p>Inside <strong>Snippets</strong> click <strong>Add a new snippet</strong>, name it <strong>specification-table</strong>
-                and paste the following code:<br/>
-                <span class="text-info">Don't forget to change <strong>namespace.metakey</strong> to the namespace and meta key you created in step 1.</span>
-            </p>
+                <div class="px-3">
+                    <p>In your Shopify admin, go to <strong>Online Store &gt; Themes</strong>. On your current theme,
+                        click the
+                        <strong>Actions</strong> drop down and choose <strong>Edit code</strong>.</p>
+                    <p>Inside <strong>Snippets</strong> click <strong>Add a new snippet</strong>, name it <strong>specification-table</strong>
+                        and paste the following code:<br/>
+                        <span class="text-info">Don't forget to change <strong>namespace.metakey</strong> to the namespace and meta key you created in step 1.</span>
+                    </p>
 
-            <pre class="border px-4"><code class="language-php">
+                    <pre class="border px-4"><code class="language-php">
 {% if product.metafields.namespace.metakey.value.size &#x3E; 0 %}
     &#x3C;table class=&#x22;table table-bordered&#x22;&#x3E;
         {% for row in product.metafields.namespace.metakey.value %}
@@ -93,45 +100,64 @@
 {% endif %}
         </code></pre>
 
-            <p>You can now use this snippet in your product templates or product snippets with the following code:</p>
+                    <p>You can now use this snippet in your product templates or product snippets with the following
+                        code:</p>
 
-            <pre class="border px-4"><code class="language-php">
+                    <pre class="border px-4"><code class="language-php">
 {% render 'specification-table' %}
         </code></pre>
 
-            <h3 class="my-4"><strong>3.</strong> Generate a table for your product</h3>
-        </div>
+                </div>
 
-        <div class="px-3">
-            <p>Populate the table maker at the top of this page, you can add columns and rows, you can even drag the
-                rows
-                around.</p>
+                <h3 class="my-4"><strong>3.</strong> Generate a table for your product</h3>
 
-            <p>Once you have finished making your table, click the <strong>Export JSON</strong> button to generate the
-                code
-                you need for your Shopify product metafield.</p>
+                <div class="px-3">
+                    <p>Populate the table maker at the top of this page, you can add columns and rows, you can even drag
+                        the
+                        rows
+                        around.</p>
 
-            <p>Edit your product on the Shopify admin, scroll to the bottom and paste the generated JSON data into the
-                JSON
-                metafield you created in step 1.</p>
+                    <p>Once you have finished making your table, click the <strong>Export JSON</strong> button to
+                        generate the
+                        code
+                        you need for your Shopify product metafield.</p>
 
-        </div>
+                    <p>Edit your product on the Shopify admin, scroll to the bottom and paste the generated JSON data
+                        into the
+                        JSON
+                        metafield you created in step 1.</p>
 
-        <h3 class="my-4"><strong>4.</strong> Edit an already existing table</h3>
+                </div>
 
-        <div class="px-3">
-            <p>To edit an already generated table, copy the JSON data from the JSON metafield on the product in your
-                Shopify
-                admin paste it in to the <strong>Import JSON</strong> box which pops up when clicking the <strong>Import
-                    JSON</strong> at the top of this page.</p>
+                <h3 class="my-4"><strong>4.</strong> Edit an already existing table</h3>
 
-            <p>Repeat step 3.</p>
+                <div class="px-3">
+                    <p>To edit an already generated table, copy the JSON data from the JSON metafield on the product in
+                        your
+                        Shopify
+                        admin paste it in to the <strong>Import JSON</strong> box which pops up when clicking the
+                        <strong>Import
+                            JSON</strong> at the top of this page.</p>
+
+                    <p>Repeat step 3.</p>
+                </div>
+
+                <h4 class="text-primary my-5">I hope this helps you as much as it helped us. <a class="text-primary"
+                                                                                                title="Shopify Developer"
+                                                                                                href="https://www.webfwd.co.uk/"
+                                                                                                target="_blank">Webforward</a>
+                </h4>
+
+            </div>
+
+            <div class="col-md-5">
+                <img class="img-fluid mb-3" src="assets/example2.png"/>
+                <img class="img-fluid" src="assets/example1.png"/>
+            </div>
+
         </div>
 
     </div>
-
-
-    <h4 class="text-primary my-5">I hope this helps you as much as it helped us. <a class="text-primary" title="Shopify Developer" href="https://www.webfwd.co.uk/" target="_blank">Webforward</a></h4>
 
 
 </div>
