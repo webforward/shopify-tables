@@ -1,0 +1,36 @@
+@charset "UTF-8";
+body.dragging,
+body.dragging * {
+  cursor: move !important;
+}
+
+h1 {
+  font-size: 1.8rem;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+  margin-top: -30px;
+}
+
+table.table tr.placeholder {
+  position: relative;
+  height: 56px;
+  border-style: none;
+}
+table.table tr.placeholder:before {
+  position: absolute;
+  content: "";
+  font-family: bootstrap-icons;
+  color: red;
+  font-size: 1.6rem;
+  margin: 10px 0 0 -18px;
+}
+table.table tr td.drag a {
+  color: red;
+  font-size: 1.6rem;
+}
+
+/*# sourceMappingURL=style.css.map */
