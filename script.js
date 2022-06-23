@@ -6,6 +6,8 @@ let tableColumnInput =
     '<td><input type="text" value="%s" style="width: 250px;" class="form-control"/></td>';
 
 (function ($) {
+    hljs.highlightAll();
+
     importModal = new bootstrap.Modal(document.getElementById("import-modal"), {
         keyboard: false
     });

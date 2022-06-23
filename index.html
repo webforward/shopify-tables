@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>CodePen - Table Builder Import/Export JSON</title>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css'>
+    <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/yeti/bootstrap.min.css'>
+    <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css'>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/styles/github.min.css">
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -41,31 +42,97 @@
         </div>
     </div>
 
-    <div class="accordion mt-5">
-        <div class="accordion-item">
+    <hr class="mt-5"/>
+    <div class="instructions mt-4">
+        <h2 class="font-bold text-primary">How to use:</h2>
 
-            <h2 class="accordion-header" id="tab1">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#panel1" aria-expanded="false" aria-controls="tab1">
-                    How to install and use
-                </button>
-            </h2>
-            <div id="panel1" class="accordion-collapse collapse" aria-labelledby="tab1">
-                <div class="accordion-body">
+        <h3 class="my-4"><strong>1.</strong> Create a product metafield</h3>
 
-                    <h3>1. Create a product metafield</h3>
+        <div class="px-3">
+            <p>Open your Shopify admin, click <strong>Settings</strong> at the bottom left, click
+                <strong>Metafield</strong>
+                towards the bottom on the left-hand side and then choose <strong>Products</strong> on the right.</p>
 
-                    <h3>2. Create a template snippet to display the table</h3>
+            <p>At the top right, click <strong>Add definition</strong> to set up a new product metafield.</p>
 
-                    <h3>3. Generate a table</h3>
+            <p>Give your metafield a name which will be displayed on the product add and edit pages.</p>
 
-                    <h3>4. Edit an already existing table</h3>
+            <p>Set a <strong>namespace and key</strong>, if you do not know what to put here, we generally use something
+                like <strong>settings.infotable</strong>. Remember what you put here as it will be needed in step 2.</p>
 
-                </div>
-            </div>
+            <p>Tick to <strong>Expose this metafield to Storefront API requests</strong></p>
+
+            <p>And finally, click <strong>Select content type</strong> and choose <strong>JSON</strong></p>
+        </div>
+
+        <h3 class="my-4"><strong>2.</strong> Create a template snippet to display the table</h3>
+
+        <div class="px-3">
+            <p>In your Shopify admin, go to <strong>Online Store &gt; Themes</strong>. On your current theme, click the
+                <strong>Actions</strong> drop down and choose <strong>Edit code</strong>.</p>
+            <p>Inside <strong>Snippets</strong> click <strong>Add a new snippet</strong>, name it <strong>specification-table</strong>
+                and paste the following code:<br/>
+                <span class="text-info">Don't forget to change <strong>namespace.metakey</strong> to the namespace and meta key you created in step 1.</span>
+            </p>
+
+            <pre class="border px-4"><code class="language-php">
+{% if product.metafields.namespace.metakey.value.size &#x3E; 0 %}
+    &#x3C;table class=&#x22;table table-bordered&#x22;&#x3E;
+        {% for row in product.metafields.namespace.metakey.value %}
+            &#x3C;tr&#x3E;
+                {% if row.size == 1 %}
+                    &#x3C;th colspan=&#x22;999&#x22;&#x3E;{{ row.0 }}&#x3C;/th&#x3E;
+                {% else %}
+                    {% for col in row %}
+                        &#x3C;td&#x3E;{{ col | last }}&#x3C;/td&#x3E;
+                    {% endfor %}
+                {% endif %}
+            &#x3C;/tr&#x3E;
+        {% endfor %}
+    &#x3C;/table&#x3E;
+{% endif %}
+        </code></pre>
+
+            <p>You can now use this snippet in your product templates or product snippets with the following code:</p>
+
+            <pre class="border px-4"><code class="language-php">
+{% render 'specification-table' %}
+        </code></pre>
+
+            <h3 class="my-4"><strong>3.</strong> Generate a table for your product</h3>
+        </div>
+
+        <div class="px-3">
+            <p>Populate the table maker at the top of this page, you can add columns and rows, you can even drag the
+                rows
+                around.</p>
+
+            <p>Once you have finished making your table, click the <strong>Export JSON</strong> button to generate the
+                code
+                you need for your Shopify product metafield.</p>
+
+            <p>Edit your product on the Shopify admin, scroll to the bottom and paste the generated JSON data into the
+                JSON
+                metafield you created in step 1.</p>
+
+        </div>
+
+        <h3 class="my-4"><strong>4.</strong> Edit an already existing table</h3>
+
+        <div class="px-3">
+            <p>To edit an already generated table, copy the JSON data from the JSON metafield on the product in your
+                Shopify
+                admin paste it in to the <strong>Import JSON</strong> box which pops up when clicking the <strong>Import
+                    JSON</strong> at the top of this page.</p>
+
+            <p>Repeat step 3.</p>
         </div>
 
     </div>
+
+
+    <h4 class="text-primary my-5">I hope this helps you as much as it helped us. <a class="text-primary" title="Shopify Developer" href="https://www.webfwd.co.uk/" target="_blank">Webforward</a></h4>
+
 
 </div>
 
@@ -134,9 +201,10 @@
     </div>
 </div>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js'></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
 <script src="./script.js"></script>
 
 </body>
