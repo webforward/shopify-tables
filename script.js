@@ -34,6 +34,7 @@ let tableColumnInput =
     //reset table
     $(".table-builder .clear-table").click(function () {
         generateTable('[{"0":"","1":""}]');
+        generateJSON();
     });
 
     // Change slimness
