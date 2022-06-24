@@ -1,9 +1,9 @@
 let importModal, exportModal, htmlModal;
 
 let tableRowStart =
-    '<tr class="sortable"><td class="drag"><a data-bs-toggle="tooltip" title="Drag Me!" href="#"><i class="fa-solid fa-ellipsis"></i><a/></div>';
+    '<td class="drag"><a data-bs-toggle="tooltip" title="Drag Me!" href="#"><i class="fa-solid fa-ellipsis"></i></a></td>';
 let tableColumnInput =
-    '<td><input type="text" value="%s" style="width: 250px;" class="form-control"/></td>';
+    '<td><input type="text" value="%s" class="form-control input-sm"/></td>';
 
 (function ($) {
     hljs.highlightAll();
@@ -29,6 +29,23 @@ let tableColumnInput =
     //reset table
     $(".table-builder .clear-table").click(function () {
         generateTable('[{"0":"","1":""}]');
+    });
+
+    // Change slimness
+    $(".table-builder .choose-slim").change(function () {
+        let val = $(this).val();
+        if (val === 'Slim') $('table.table').addClass('table-sm');
+        else $('table.table').removeClass('table-sm');
+
+    });
+
+    // Change size
+    $(".table-builder .choose-size").change(function () {
+        let val = $(this).val();
+        $('table.table').removeClass (function (index, className) {
+            return (className.match (/(^|\s)size-\S+/g) || []).join(' ');
+        })
+            .addClass('size-'+val);
     });
 
     //add row
@@ -125,6 +142,7 @@ let tableColumnInput =
         var maxColumns = findLargestRowCount(jsonTable);
 
         $.each(jsonTable, function (key, value) {
+            tableHtml += '<tr class="sortable">';
             tableHtml += tableRowStart;
             var i = 0;
             $.each(value, function (key, value) {
@@ -145,7 +163,7 @@ let tableColumnInput =
     }
 
     function addRow() {
-        let newRow = tableRowStart;
+        let newRow = '<tr class="sortable">'+tableRowStart;
         for (let i = 0; i < countColumns() - 1; i++) {
             newRow += tableColumnInput.replace("%s", "");
         }
@@ -169,8 +187,8 @@ let tableColumnInput =
         var i = 0;
         $(".table-builder table tbody tr").each(function (key, value) {
             $(this).append(
-                '<td class="ignore"><button class="text-nowrap btn btn-primary btn-block dupe-row"><i class="fa-solid fa-clone"></i></button>' +
-                '<td class="ignore"><button class="text-nowrap btn btn-danger btn-block delete-row"><i class="fa-solid fa-xmark"></i></button>'
+                '<td class="ignore"><button class="text-nowrap btn btn-primary btn-block dupe-row"><i class="fa-solid fa-clone"></i></button></td>' +
+                '<td class="ignore"><button class="text-nowrap btn btn-danger btn-block delete-row"><i class="fa-solid fa-xmark"></i></button></td>'
             );
         });
 
@@ -180,8 +198,9 @@ let tableColumnInput =
             newRow +=
                 '<td class="ignore"><button class="text-nowrap btn btn-danger btn-block delete-column" data-index="' +
                 i +
-                '"><i class="fa-solid fa-xmark"></i> Column</button></td>';
+                '"><i class="fa-solid fa-xmark"></i><span> Column</span></button></td>';
         }
+        newRow += "<td colspan='2'></td>";
         newRow += "</tr>";
         $(".table-builder table tfoot").html(newRow);
     }

@@ -14,22 +14,49 @@
 <div class="table-builder p-5">
     <h1 class="h3 mb-2">Shopify Product Metafield Specification Table Generator</h1>
     <h2 class="h6"><i class="fa-brands fa-github"></i> <a class="text-muted"
-                                                   href="https://github.com/webforward/shopify-tables"
-                                                   target="_blank">https://github.com/webforward/shopify-tables</a></h2>
+                                                          href="https://github.com/webforward/shopify-tables"
+                                                          target="_blank">https://github.com/webforward/shopify-tables</a>
+    </h2>
 
 
-    <div class="d-flex flex-row justify-content-between mt-4 mb-3">
-        <div class="d-flex flex-row">
-            <div class="btn-group me-3" role="group">
-                <button class="import-modal btn btn-primary"><i class="fa-solid fa-file-import me-1"></i> Import JSON</button>
-                <button class="html-modal btn btn-primary"><i class="fa-solid fa-file-import me-1"></i> Import HTML</button>
-            </div>
-            <button class="export-modal btn btn-info text-white">Export JSON <i class="fa-solid fa-file-export ms-1"></i></button>
-            <button class="clear-table btn btn-warning text-white ms-5"><i class="fa-solid fa-trash-can me-1"></i> Clear Table</button>
+    <div class="d-flex mt-4 mb-3">
+
+        <div class="btn-group me-3" role="group">
+            <button class="import-modal btn btn-primary fw-bold"><i class="fa-solid fa-file-import me-1"></i> Import JSON
+            </button>
+            <button class="html-modal btn btn-primary"><i class="fa-solid fa-file-import me-1"></i> Import HTML</button>
         </div>
+
+        <div class="d-inline me-3" style="width: 210px">
+            <div class="input-group">
+                <select class="form-select choose-slim" name="size">
+                    <option>Slim</option>
+                    <option selected>Normal</option>
+
+                </select>
+                <select class="form-select choose-size" name="size">
+                    <option>50</option>
+                    <option>100</option>
+                    <option>100</option>
+                    <option selected>200</option>
+                    <option>300</option>
+                    <option>400</option>
+                    <option>500</option>
+                    <option>1000</option>
+                    <option>2000</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="export-modal btn btn-info text-white fw-bold">Export JSON <i class="fa-solid fa-file-export ms-1"></i>
+        </button>
+
+        <button class="clear-table btn btn-warning text-white ms-5"><i class="fa-solid fa-trash-can me-1"></i> Clear
+            Table
+        </button>
     </div>
 
-    <table class="table table-bordered w-auto position-relative">
+    <table class="table w-auto position-relative">
         <tbody>
         </tbody>
         <tfoot></tfoot>

@@ -15,15 +15,60 @@ h1 {
   margin-top: -30px;
 }
 
-table.table tr.duped {
+table.table.size-50 input {
+  width: 50px;
+}
+table.table.size-100 input {
+  width: 100px;
+}
+table.table.size-200 input {
+  width: 200px;
+}
+table.table.size-300 input {
+  width: 300px;
+}
+table.table.size-400 input {
+  width: 400px;
+}
+table.table.size-500 input {
+  width: 500px;
+}
+table.table.size-1000 input {
+  width: 1000px;
+}
+table.table.size-2000 input {
+  width: 2000px;
+}
+table.table.size-50 .delete-column > span {
+  display: none;
+}
+table.table.table-sm input, table.table.table-sm button {
+  padding: 0.1rem 0.3rem;
+}
+table.table.table-sm tbody button {
+  width: 30px;
+}
+table.table.table-sm tbody tr.placeholder {
+  height: 38px;
+}
+table.table.table-sm .drag a {
+  line-height: 27px;
+}
+table.table > :not(:first-child) {
+  border-top: 0 none;
+}
+table.table tbody tr {
+  border-top-width: 1px;
+}
+table.table tbody tr.duped {
   animation: duped 2s linear;
 }
-table.table tr.placeholder {
+table.table tbody tr.placeholder {
   position: relative;
   height: 56px;
   border-style: none;
 }
-table.table tr.placeholder:before {
+table.table tbody tr.placeholder:before {
   position: absolute;
   content: "";
   font-family: "Font Awesome 6 Free";
@@ -32,9 +77,32 @@ table.table tr.placeholder:before {
   font-weight: 900;
   margin: 10px 0 0 -18px;
 }
-table.table tr td.drag a {
+table.table tbody tr td {
+  border-left-width: 1px;
+}
+table.table tbody tr td button {
+  width: 42px;
+}
+table.table tbody tr td.drag a {
   color: #2c9ad9;
   font-size: 1.6rem;
+}
+table.table tbody tr td:last-child {
+  border-left-width: 0;
+  border-right-width: 1px;
+}
+table.table tfoot tr {
+  border-width: 0;
+}
+table.table tfoot tr td {
+  border-bottom-width: 0;
+}
+table.table tfoot tr td:nth-child(2) {
+  border-left-width: 1px;
+}
+table.table tfoot tr td.ignore {
+  border-right-width: 1px;
+  border-bottom-width: 1px;
 }
 
 @keyframes duped {
