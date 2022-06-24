@@ -54,7 +54,10 @@ let tableColumnInput =
 
     // Dupe row
     $(document).on("click", ".dupe-row", function () {
-        $(this).closest("tr").after($(this).closest("tr").clone());
+        let clone = $(this).closest("tr").clone();
+        $(this).closest("tr").after(clone).next()
+            .addClass('duped');
+
     });
 
     //delete column
@@ -166,7 +169,7 @@ let tableColumnInput =
         var i = 0;
         $(".table-builder table tbody tr").each(function (key, value) {
             $(this).append(
-                '<td class="ignore"><button class="text-nowrap btn btn-warning btn-block dupe-row"><i class="fa-solid fa-clone"></i></button>' +
+                '<td class="ignore"><button class="text-nowrap btn btn-primary btn-block dupe-row"><i class="fa-solid fa-clone"></i></button>' +
                 '<td class="ignore"><button class="text-nowrap btn btn-danger btn-block delete-row"><i class="fa-solid fa-xmark"></i></button>'
             );
         });

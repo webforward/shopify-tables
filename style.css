@@ -15,6 +15,9 @@ h1 {
   margin-top: -30px;
 }
 
+table.table tr.duped {
+  animation: duped 2s linear;
+}
 table.table tr.placeholder {
   position: relative;
   height: 56px;
@@ -30,8 +33,17 @@ table.table tr.placeholder:before {
   margin: 10px 0 0 -18px;
 }
 table.table tr td.drag a {
-  color: red;
+  color: #2c9ad9;
   font-size: 1.6rem;
+}
+
+@keyframes duped {
+  from {
+    background-color: #fffbcb;
+  }
+  to {
+    background-color: #ffffff;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

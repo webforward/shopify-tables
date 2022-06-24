@@ -16,6 +16,9 @@ h1 {
 
 table.table {
   tr {
+    &.duped {
+      animation: duped 2s linear;
+    }
     &.placeholder {
       position: relative;
       height: 56px;
@@ -33,10 +36,20 @@ table.table {
     td {
       &.drag {
         a {
-          color: red;
+          color: #2c9ad9;
           font-size: 1.6rem;
         }
       }
     }
+  }
+}
+
+@keyframes duped {
+  from {
+    background-color: #fffbcb;
+  }
+
+  to {
+    background-color: #ffffff;
   }
 }
