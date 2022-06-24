@@ -20,8 +20,13 @@ let tableColumnInput =
         keyboard: false
     });
 
+
     //define default table
-    let table = '[{"0":"Specification"},{"0":"Dimensions","1":"1000mm x 1430mm"}]';
+    let table;
+    if (window.localStorage.getItem('json') !== null)
+        table = window.localStorage.getItem('json');
+    else
+        table = '[{"0":"Specification"},{"0":"Dimensions","1":"1000mm x 1430mm"}]';
 
     //generate default table
     generateTable(table);
@@ -36,17 +41,23 @@ let tableColumnInput =
         let val = $(this).val();
         if (val === 'Slim') $('table.table').addClass('table-sm');
         else $('table.table').removeClass('table-sm');
-
+        window.localStorage.setItem('slim', val);
     });
+    if (window.localStorage.getItem('slim') !== null)
+        $('.choose-slim').val(window.localStorage.getItem('slim')).trigger('change');
 
     // Change size
     $(".table-builder .choose-size").change(function () {
         let val = $(this).val();
-        $('table.table').removeClass (function (index, className) {
-            return (className.match (/(^|\s)size-\S+/g) || []).join(' ');
+        $('table.table').removeClass(function (index, className) {
+            return (className.match(/(^|\s)size-\S+/g) || []).join(' ');
         })
-            .addClass('size-'+val);
+            .addClass('size-' + val);
+        window.localStorage.setItem('size', val);
     });
+    if (window.localStorage.getItem('size') !== null)
+        $('.choose-size').val(window.localStorage.getItem('size')).trigger('change');
+
 
     //add row
     $(".table-builder .add-row").click(function () {
@@ -67,6 +78,7 @@ let tableColumnInput =
     $(document).on("click", ".delete-row", function () {
         if (countRows() <= 1) return;
         $(this).closest("tr").remove();
+        generateJSON();
     });
 
     // Dupe row
@@ -74,13 +86,17 @@ let tableColumnInput =
         let clone = $(this).closest("tr").clone();
         $(this).closest("tr").after(clone).next()
             .addClass('duped');
-
+        generateJSON();
     });
 
     //delete column
     $(document).on("click", ".delete-column", function () {
         var index = $(this).parent().index();
         deleteColumn(index);
+    });
+
+    $(document).on("keyup", "table.table input", function () {
+        generateJSON();
     });
 
     $(".table-builder .import-modal").click(function () {
@@ -97,6 +113,18 @@ let tableColumnInput =
     });
 
     $(".table-builder .export-modal").click(function () {
+        let json = generateJSON();
+        exportModal.show();
+        $("#export-modal textarea").val(json);
+        $("#export-modal textarea").focus().select();
+    });
+
+    $(".table-builder .export-json").click(function () {
+        $("#export-modal textarea").val("");
+        exportModal.hide();
+    });
+
+    function generateJSON() {
         let json = [];
         let inc = 0;
         $(".table-builder tbody tr").each(function (row_key, row) {
@@ -106,24 +134,17 @@ let tableColumnInput =
                 .each(function (col_key, col) {
                     if ($(col).children("input").length) {
                         var value = $(this).children("input").val();
-                        if (value.length > 0) {
-                            obj[inc] = value;
+                        if (value.length > 0 || col_key < 2) {
+                            obj[col_key] = value ?? '';
                         }
-                        inc++;
                     }
                 });
             inc = 0;
             json.push(obj);
         });
-        exportModal.show();
-        $("#export-modal textarea").val(JSON.stringify(json));
-        $("#export-modal textarea").focus().select();
-    });
-
-    $(".table-builder .export-json").click(function () {
-        $("#export-modal textarea").val("");
-        exportModal.hide();
-    });
+        window.localStorage.setItem('json', JSON.stringify(json));
+        return JSON.stringify(json);
+    }
 
     function findLargestRowCount(json) {
         let count = 0;
@@ -158,12 +179,12 @@ let tableColumnInput =
         });
         $(".table-builder table tbody").html(tableHtml);
         addDeleteButtons();
-
         initSortable();
+        generateJSON();
     }
 
     function addRow() {
-        let newRow = '<tr class="sortable">'+tableRowStart;
+        let newRow = '<tr class="sortable">' + tableRowStart;
         for (let i = 0; i < countColumns() - 1; i++) {
             newRow += tableColumnInput.replace("%s", "");
         }
@@ -203,6 +224,7 @@ let tableColumnInput =
         newRow += "<td colspan='2'></td>";
         newRow += "</tr>";
         $(".table-builder table tfoot").html(newRow);
+        generateJSON();
     }
 
     function deleteColumn(index) {
@@ -210,6 +232,7 @@ let tableColumnInput =
         $(".table-builder table tr").each(function (key, value) {
             $(this).children("td").eq(index).remove();
         });
+        generateJSON();
     }
 
     function countRows() {
