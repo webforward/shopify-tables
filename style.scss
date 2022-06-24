@@ -22,10 +22,11 @@ table.table {
       border-style: none;
       &:before {
         position: absolute;
-        content: "\F114";
-        font-family: bootstrap-icons;
+        content: "\f0da";
+        font-family: "Font Awesome 6 Free";
         color: red;
         font-size: 1.6rem;
+        font-weight: 900;
         margin: 10px 0 0 -18px;
       }
     }

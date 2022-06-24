@@ -22,10 +22,11 @@ table.table tr.placeholder {
 }
 table.table tr.placeholder:before {
   position: absolute;
-  content: "";
-  font-family: bootstrap-icons;
+  content: "";
+  font-family: "Font Awesome 6 Free";
   color: red;
   font-size: 1.6rem;
+  font-weight: 900;
   margin: 10px 0 0 -18px;
 }
 table.table tr td.drag a {

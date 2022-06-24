@@ -1,7 +1,7 @@
 let importModal, exportModal, htmlModal;
 
 let tableRowStart =
-    '<tr class="sortable"><td class="drag"><a href="#"><i class="bi bi-grip-horizontal"></i><a/></div>';
+    '<tr class="sortable"><td class="drag"><a data-bs-toggle="tooltip" title="Drag Me!" href="#"><i class="fa-solid fa-ellipsis"></i><a/></div>';
 let tableColumnInput =
     '<td><input type="text" value="%s" style="width: 250px;" class="form-control"/></td>';
 
@@ -50,6 +50,11 @@ let tableColumnInput =
     $(document).on("click", ".delete-row", function () {
         if (countRows() <= 1) return;
         $(this).closest("tr").remove();
+    });
+
+    // Dupe row
+    $(document).on("click", ".dupe-row", function () {
+        $(this).closest("tr").after($(this).closest("tr").clone());
     });
 
     //delete column
@@ -161,7 +166,8 @@ let tableColumnInput =
         var i = 0;
         $(".table-builder table tbody tr").each(function (key, value) {
             $(this).append(
-                '<td class="ignore"><button class="text-nowrap btn btn-danger btn-block delete-row"><i class="bi bi-x-lg"></i></button>'
+                '<td class="ignore"><button class="text-nowrap btn btn-warning btn-block dupe-row"><i class="fa-solid fa-clone"></i></button>' +
+                '<td class="ignore"><button class="text-nowrap btn btn-danger btn-block delete-row"><i class="fa-solid fa-xmark"></i></button>'
             );
         });
 
@@ -171,7 +177,7 @@ let tableColumnInput =
             newRow +=
                 '<td class="ignore"><button class="text-nowrap btn btn-danger btn-block delete-column" data-index="' +
                 i +
-                '"><i class="bi bi-x-lg"></i> Column</button></td>';
+                '"><i class="fa-solid fa-xmark"></i> Column</button></td>';
         }
         newRow += "</tr>";
         $(".table-builder table tfoot").html(newRow);
@@ -191,7 +197,7 @@ let tableColumnInput =
 
     function countColumns() {
         // console.log("Columns: "+ $(".table-builder table tbody tr:first-child td").length - 1)
-        return $(".table-builder table tbody tr:first-child td").length - 1 ?? 0;
+        return $(".table-builder table tbody tr:first-child td").length - 2 ?? 0;
     }
 
     function generateImportedTable() {
