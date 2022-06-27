@@ -37,6 +37,11 @@ let tableColumnInput =
         generateJSON();
     });
 
+    $(".table-builder .how-to-use").click(function () {
+        $('.instructions').removeClass('d-none');
+        window.scrollTo(0, $('.table-builder').height()+80);
+    });
+
     // Change slimness
     $(".table-builder .choose-slim").change(function () {
         let val = $(this).val();

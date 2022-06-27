@@ -108,6 +108,8 @@ table.table tfoot tr td.ignore {
 .instructions {
   border-top: solid 1px lightgray;
   background-color: #f6f6f7;
+  position: relative;
+  overflow: hidden;
 }
 
 @keyframes duped {

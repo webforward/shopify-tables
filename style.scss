@@ -15,14 +15,38 @@ h1 {
 }
 
 table.table {
-  &.size-50 input { width: 50px; }
-  &.size-100 input { width: 100px; }
-  &.size-200 input { width: 200px; }
-  &.size-300 input { width: 300px; }
-  &.size-400 input { width: 400px; }
-  &.size-500 input { width: 500px; }
-  &.size-1000 input { width: 1000px; }
-  &.size-2000 input { width: 2000px; }
+  &.size-50 input {
+    width: 50px;
+  }
+
+  &.size-100 input {
+    width: 100px;
+  }
+
+  &.size-200 input {
+    width: 200px;
+  }
+
+  &.size-300 input {
+    width: 300px;
+  }
+
+  &.size-400 input {
+    width: 400px;
+  }
+
+  &.size-500 input {
+    width: 500px;
+  }
+
+  &.size-1000 input {
+    width: 1000px;
+  }
+
+  &.size-2000 input {
+    width: 2000px;
+  }
+
   &.size-50 .delete-column > span {
     display: none;
   }
@@ -31,12 +55,15 @@ table.table {
     input, button {
       padding: .1rem .3rem
     }
+
     tbody button {
       width: 30px;
     }
+
     tbody tr.placeholder {
       height: 38px;
     }
+
     .drag {
       a {
         line-height: 27px;
@@ -44,19 +71,23 @@ table.table {
     }
   }
 
-  &>:not(:first-child) {
+  & > :not(:first-child) {
     border-top: 0 none;
   }
+
   tbody {
     tr {
       border-top-width: 1px;
+
       &.duped {
         animation: duped 2s linear;
       }
+
       &.placeholder {
         position: relative;
         height: 56px;
         border-style: none;
+
         &:before {
           position: absolute;
           content: "\f0da";
@@ -67,17 +98,21 @@ table.table {
           margin: 10px 0 0 -18px;
         }
       }
+
       td {
         border-left-width: 1px;
+
         button {
           width: 42px;
         }
+
         &.drag {
           a {
             color: #2c9ad9;
             font-size: 1.6rem;
           }
         }
+
         &:last-child {
           border-left-width: 0;
           border-right-width: 1px;
@@ -85,14 +120,18 @@ table.table {
       }
     }
   }
+
   tfoot {
     tr {
       border-width: 0;
+
       td {
         border-bottom-width: 0;
+
         &:nth-child(2) {
           border-left-width: 1px;
         }
+
         &.ignore {
           border-right-width: 1px;
           border-bottom-width: 1px;
@@ -106,7 +145,9 @@ table.table {
 
 .instructions {
   border-top: solid 1px lightgray;
-  background-color: #f6f6f7
+  background-color: #f6f6f7;
+  position: relative;
+  overflow: hidden;
 }
 
 @keyframes duped {
