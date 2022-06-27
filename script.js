@@ -3,7 +3,7 @@ let importModal, exportModal, htmlModal;
 let tableRowStart =
     '<td class="drag"><a data-bs-toggle="tooltip" title="Drag Me!" href="#"><i class="fa-solid fa-ellipsis"></i></a></td>';
 let tableColumnInput =
-    '<td><input type="text" value="%s" class="form-control input-sm"/></td>';
+    '<td><textarea class="form-control input-sm" rows="1">%s</textarea></td>';
 
 (function ($) {
     hljs.highlightAll();
@@ -101,7 +101,7 @@ let tableColumnInput =
         deleteColumn(index);
     });
 
-    $(document).on("keyup", "table.table input", function () {
+    $(document).on("keyup", "table.table textarea", function () {
         generateJSON();
     });
 
@@ -138,8 +138,8 @@ let tableColumnInput =
             $(row)
                 .children("td")
                 .each(function (col_key, col) {
-                    if ($(col).children("input").length) {
-                        var value = $(this).children("input").val();
+                    if ($(col).children("textarea").length) {
+                        var value = $(this).children("textarea").val();
                         if (value.length > 0 || col_key < 2) {
                             obj[col_key] = value ?? '';
                         }

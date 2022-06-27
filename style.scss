@@ -15,35 +15,35 @@ h1 {
 }
 
 table.table {
-  &.size-50 input {
+  &.size-50 textarea {
     width: 50px;
   }
 
-  &.size-100 input {
+  &.size-100 textarea {
     width: 100px;
   }
 
-  &.size-200 input {
+  &.size-200 textarea {
     width: 200px;
   }
 
-  &.size-300 input {
+  &.size-300 textarea {
     width: 300px;
   }
 
-  &.size-400 input {
+  &.size-400 textarea {
     width: 400px;
   }
 
-  &.size-500 input {
+  &.size-500 textarea {
     width: 500px;
   }
 
-  &.size-1000 input {
+  &.size-1000 textarea {
     width: 1000px;
   }
 
-  &.size-2000 input {
+  &.size-2000 textarea {
     width: 2000px;
   }
 
@@ -52,7 +52,7 @@ table.table {
   }
 
   &.table-sm {
-    input, button {
+    textarea, button {
       padding: .1rem .3rem
     }
 

@@ -15,34 +15,34 @@ h1 {
   margin-top: -30px;
 }
 
-table.table.size-50 input {
+table.table.size-50 textarea {
   width: 50px;
 }
-table.table.size-100 input {
+table.table.size-100 textarea {
   width: 100px;
 }
-table.table.size-200 input {
+table.table.size-200 textarea {
   width: 200px;
 }
-table.table.size-300 input {
+table.table.size-300 textarea {
   width: 300px;
 }
-table.table.size-400 input {
+table.table.size-400 textarea {
   width: 400px;
 }
-table.table.size-500 input {
+table.table.size-500 textarea {
   width: 500px;
 }
-table.table.size-1000 input {
+table.table.size-1000 textarea {
   width: 1000px;
 }
-table.table.size-2000 input {
+table.table.size-2000 textarea {
   width: 2000px;
 }
 table.table.size-50 .delete-column > span {
   display: none;
 }
-table.table.table-sm input, table.table.table-sm button {
+table.table.table-sm textarea, table.table.table-sm button {
   padding: 0.1rem 0.3rem;
 }
 table.table.table-sm tbody button {
