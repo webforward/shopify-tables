@@ -105,6 +105,11 @@ table.table tfoot tr td.ignore {
   border-bottom-width: 1px;
 }
 
+.instructions {
+  border-top: solid 1px lightgray;
+  background-color: #f6f6f7;
+}
+
 @keyframes duped {
   from {
     background-color: #fffbcb;
