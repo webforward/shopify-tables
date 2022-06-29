@@ -107,6 +107,7 @@ let tableColumnInput =
 
     $(".table-builder .import-modal").click(function () {
         importModal.show();
+        $("#import-modal textarea").focus();
     });
 
     $(".modal .import-html").click(function () {
