@@ -130,7 +130,9 @@
         {% for row in product.metafields.namespace.metakey.value %}
             &#x3C;tr&#x3E;
                 {% if row.size == 1 %}
-                    &#x3C;th colspan=&#x22;999&#x22;&#x3E;{{ row.0 }}&#x3C;/th&#x3E;
+                    {% for col in row %}
+                        &#x3C;th colspan=&#x22;999&#x22;&#x3E;{{ col | last }}&#x3C;/th&#x3E;
+                    {% endfor %}
                 {% else %}
                     {% for col in row %}
                         &#x3C;td&#x3E;{{ col | last }}&#x3C;/td&#x3E;
